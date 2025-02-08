@@ -1,0 +1,111 @@
+text4agreement: |
+  Nara Institute of Science and Technology,
+  Graduate School of Advanced Science and Technology,
+  Research Topic: Parameter Reduction in Diffusion-Based Text-to-speech Synthesis Using Time-Frequency Kernel Module.
+  
+  Thank you for participating in the experiment. Please read the content below carefully, and if you agree, please provide online consent.
+  Please be sure to read the following carefully to understand the significance of this experiment and the protection of your privacy.
+
+  1. **Purpose and approach of this research.**
+    - This research aims to evaluate a lightweight TTS (Text-to-Speech) model using a diffusion model.
+    - In particular, in order to verify methods to reduce the number of parameters while maintaining the quality of the synthesized speech, a sound quality evaluation (Mean Opinion Score, MOS) by actual listeners will be conducted.
+    - In this experiment, participants will listen to speech synthesized by multiple TTS systems and score the quality of the speech on a scale of 1 (Bad) to 5 (Excellent).
+    
+  2. **Expected significance of the research.**
+    - While Neural TTS can synthesize high-quality speech, it is difficult to use in environments with limited computational resources due to the large size of the model.
+    - This research aims to develop a method that can both reduce the weight of the model and maintain high sound quality, and by experimentally verifying the effectiveness of this method, it is expected to contribute to the practical application of TTS models in the future.
+  
+  3. **Provision or withdrawal of online Consent.**
+    - The consent is voluntary and you will not be disadvantaged if you do not consent.
+    - You can withdraw your consent at any time, even after you have participated, and you will not be disadvantaged if you do so.
+
+  4. **Anonymized and statistical processing of opinions.**
+    - **Your name is used only for Consent.**
+    - The evaluation scores collected in the experiments in this research will be **anonymized** and individuals will not be identified.
+    - The data collected will be processed statistically and will not be used in a way that allows individual responses to be identified.
+    - Statistical indicators such as the mean and variance of the MOS are used to analyze the results.
+
+  5. **Protection of privacy and publication of results.**
+    - Data collected in the experiment will be used only for the purpose of this study and will not be disclosed to any third party.
+    - The results may be published in academic papers, conference presentations, etc., but even in such cases, no personally identifiable information will be included.
+
+  6. **Open-ended questions regarding this study.**
+    - If you have any questions about the experiment, please do not hesitate to contact us at below.
+    - You have the right to ask for an explanation about this study and to decide to participate in it after you are satisfied with the results.
+
+  If you have read the above text and agree with the significance of this experiment and the protection of privacy,
+  In the form below,
+  Fill in your name and click on the checkbox,
+  After clicking the checkbox
+  Next button to proceed with the experiment. 
+
+  If you have any question, please feel free to reach us at the email address given below.
+  Thank you.
+
+  Email: hailab4exp@ml.naist.ac.jp
+
+
+text4mosexperiment: |
+  **The MOS experiment begins on the next page.**
+
+  **1. Outline of the experiment**
+
+    In this experiment, participants listen to multiple computer-generated speech and rate the quality of each speech on a 5-point scale.
+    This evaluation method is called **Mean Opinion Score (MOS)**.
+    In this experiment, you will be asked to evaluate the naturalness of the synthesized speech.
+
+  **2. Experimental Flow**
+  - Confirmation of experimental environment
+    - This experiment should be conducted in a **quiet environment**. It is preferable to conduct this experiment in an environment where there is as little ambient noise as possible, and where you can concentrate on listening to the speech. 
+    - **Use of headphones or earphones** is recommended.
+    - Adjust the volume to an appropriate level when playing the speech.
+  - Listening to speech
+    - The speech controller will appear on the experiment screen.
+    - Press the play button on the controller to play the speech.
+    - Each speech may be played back **once** or **replayed multiple times**.
+  - Evaluating the speech
+    - After listening to the speech, rate it on a 5-point scale as shown in the table below.
+    - Please rate the audio as you feel it.
+  - After evaluating one speech, proceed to the next speech by pressing the Next button drawn on the screen.
+    - **Once you press the Next button to move on to the next page, you will not be able to return to the previous page**.
+    - **Please press the Next button only once.**
+    - The same procedure is used to evaluate all the speeches.
+    - When the experiment is completed, the results will be automatically sent to you.
+
+  | Evaluation Score | Evaluation Guideline |
+  | ---| --- | 
+  | 5 (Excellent) | Very natural and easy to listen to, almost indistinguishable from a human voice |
+  | 4 (Good) | Sounds almost natural, although it is somewhat like a synthetic speech |
+  | 3 (Fair) | You can tell it is a synthesized speech, but it does not impair your listening comprehension. |
+  | 2 (Poor) | Mechanical sound is strong and sounds unnatural. |
+  | 1 (Bad) | Very unnatural and difficult to understand |
+
+
+  **3. notes on the experiment**
+  - Evaluate as you feel.
+  - You may take a break during the experiment.
+    - However, it is ideal to finish in as short a time as possible, as prolonged interruptions may change the evaluation criteria.
+  - Please do not intentionally bias your evaluation.
+    - For example, instead of giving all speeches the same score, please be aware of the differences between them.
+    
+  **4. Purpose of the Experiment and Requests**
+    
+    This research aims to improve the quality and lightweight of synthetic speech, and your evaluation will greatly contribute to the technological development of this field.We appreciate your cooperation.
+    Please relax, listen to the speech, and evaluate it.
+
+
+table_mos4eval: |
+  | Evaluation Score | Evaluation Guideline |
+  | ---| --- | 
+  | 5 (Excellent) | Very natural and easy to listen to, almost indistinguishable from a human voice |
+  | 4 (Good) | Sounds almost natural, although it is somewhat like a synthetic speech |
+  | 3 (Fair) | You can tell it is a synthesized speech, but it does not impair your listening comprehension. |
+  | 2 (Poor) | Mechanical sound is strong and sounds unnatural. |
+  | 1 (Bad) | Very unnatural and difficult to understand |
+
+
+text4cmosexperiment: |
+
+
+
+table_cmos4eval: | 
