@@ -8,10 +8,10 @@ git https://github.com/kaedenagomiya/mos_env.git
 cd mos_env
 python3 -m venv venv
 source venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements_mod.txt
 cp ~/Downloads/data.tar.gz ./
 tar -zxvf data.tar.gz
-python3 streamlit run  app_mos.py --server.port 8051
+streamlit run  app_mos.py --server.port 8051
 ```
 
 ### if use uv
