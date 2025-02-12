@@ -1,5 +1,5 @@
 
-## install
+## install and run
 
 I have confirmed that it works with python 3.10.14.
 
@@ -14,6 +14,7 @@ tar -zxvf data.tar.gz
 streamlit run  app_mos.py --server.port 8051
 ```
 
+<!-- 
 ### if use uv
 
 ```
@@ -44,3 +45,4 @@ python3 streamlit run  app_mos.py --server.port 8051
 ```
 
 ## if you use 
+-->
