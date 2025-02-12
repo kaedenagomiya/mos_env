@@ -36,7 +36,7 @@ if "exp_version" not in st.session_state:
 exp_version = st.session_state.exp_version
 
 if "audiopath_list" not in st.session_state:
-    exp_config_path = f"./exp_configs/config_mos_{exp_version}.csv"
+    exp_config_path = f"./exp_configs/config_mos_{exp_version}_lj.csv"
     df = pd.read_csv(exp_config_path)
     st.session_state.audiopath_list = df['wav_path'].tolist()
 
