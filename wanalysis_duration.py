@@ -54,6 +54,7 @@ print(durjson_list[1])
 
 less_list = []
 
+
 # 3s:7, 5s:30
 for i in range(len(durjson_list)):
     if durjson_list[i]['duration'] <= 5.0:

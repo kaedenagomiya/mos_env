@@ -1,11 +1,13 @@
 # Custom setting
 data/*
-results_evaluation/*
-results_tmp
+data*
+results_*
 tmp_wav
 hogehog*
 memo*
 !README.md
+user_*
+listen
 
 *.tar
 

@@ -69,7 +69,7 @@ if "user_id" not in st.session_state:
     st.session_state.user_id = str(uuid.uuid4())
 
 user_id = st.session_state.user_id
-
+print(f"id: {user_id}")
 #if "confirmed_evaluation" not in st.session_state:
 #    st.session_state.confirmed_evaluation = False
 
