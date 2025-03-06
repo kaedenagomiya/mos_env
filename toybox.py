@@ -430,4 +430,93 @@ def extract_model_name(path:str, models:list[str]):
         match = re.search(rf'/{model}/', path)  # Dynamically match model names
         if match:
             return model  # Returns the model name if found.
-    return None 
+    return None
+
+
+
+def make_mosfig(
+    means,
+    std,
+    color_list,
+    hatch_list=None,
+    rename_list=None,
+    y_min=1,
+    y_max=5.4,
+    tick_font=20,
+    axlabel_size=15,
+    hatch_color="white",
+    path_savefig:str=None,
+    ylabel="MOS Score",
+    xlabel="Model Name",
+    title="MOS Score"
+):
+    """
+    >>> model_names_list = ['ljspeech',  'gradtts', 'gradtfktts', 'gradtfk5tts', 'nix_deter']
+    >>> color_list = ['#ff6700', '#FF0000', '#85ACFF', '#245DFE', '#468585']
+    >>> path_savefig = "./result_save_fig/"
+    >>> df_eval = pd.read_csv("./results_evaluation/"subject_id"/audio_evaluations.csv")
+    >>> mos_means = df_eval.groupby("model_name")["evaluation"].mean()
+    >>> mos_means = mos_means.reindex(model_names_list)
+    >>> mos_std = df_eval.groupby("model_name")["evaluation"].std()
+    >>> mos_std = mos_std.reindex(model_names_list)
+    >>> toybox.make_mosfig(
+    means=mos_means,
+    std=mos_std,
+    color_list=color_list,
+    y_min=1,
+    y_max=5.4,
+    path_savefig=path_savefig
+    )   
+
+    # if use list
+    >>> model_names_list = ['ljspeech', 'gradtts', 'gradtfktts', 'gradtfk5tts', 'nix_deter']
+    >>> model_means
+    [np.float64(4.41), np.float64(4.03), np.float64(3.76), np.float64(3.98), np.float64(3.54)]
+    >>> model_std_devs
+    [np.float64(0.59), np.float64(0.70), np.float64(0.77), np.float64(0.74), np.float64(0.89)]
+    >>> mosmean_pdseries = pd.Series(model_means, index=model_names_list)
+    >>> mosstd_pdseries = pd.Series(model_std_devs, index=model_names_list)
+    >>> toybox.make_mosfig(
+    means=mosmean_pdseries,
+    std=mosstd_pdseries,
+    color_list=color_list,
+    path_savefig=save_path,
+    """
+
+    #if hasattr(means, 'value') or hasattr(means, 'index') or hasattr(std.values):
+    #mean_index_list, mean_values_list = convert_to_lists(means)
+    #_, std_values_list = convert_to_lists(std)
+    if rename_list==None:
+        mean_index_list = means.index
+    else:
+        mean_index_list = rename_list
+
+    mean_values_list = means.values
+    std_values_list = std.values
+
+    if hatch_list != None:
+        plt.rcParams['hatch.color'] = hatch_color
+    #plt.rcParams['hatch.linewidth'] = 6
+    fig, ax = plt.subplots(figsize=(8, 5))
+    # if you need hatch color, set the param like edgecolor="pink"
+    bars = ax.bar(mean_index_list, mean_values_list, yerr=std_values_list, capsize=5, color=color_list, hatch=hatch_list, alpha=0.7)
+
+    for bar, mean in zip(bars, mean_values_list):
+        #text_y = mean - 0.15  # バーの内部に表示（中央やや上）
+        text_y = 1 + 0.2  # バーの内部に表示（中央やや上）
+        text_color = "black" #if mean > (y_min + y_max) / 2 else "black"  # 明るさに応じて色を変える
+        ax.text(bar.get_x() + bar.get_width() / 2, text_y, f"{mean:.2f}", 
+                ha='center', va='center', fontsize=15, fontweight='bold', color=text_color)
+
+
+    ax.set_ylabel(ylabel, fontsize=axlabel_size, fontweight="bold")
+    ax.set_xlabel(xlabel, fontsize=axlabel_size, fontweight="bold")
+    ax.tick_params(axis="x", labelsize=12, bottom=False)
+    ax.tick_params(axis="y", labelsize=12, direction="in")
+    #ax.set_title(title)
+    ax.set_ylim(y_min, y_max) 
+    ax.yaxis.grid(True, linestyle='--', alpha=0.7)
+
+    if path_savefig is not None:
+        plt.savefig(path_savefig)
+        print(f"save: {path_savefig}")
