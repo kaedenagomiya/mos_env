@@ -443,7 +443,7 @@ def make_mosfig(
     y_min=1,
     y_max=5.4,
     tick_font=20,
-    axlabel_size=15,
+    axlabel_size=30,
     hatch_color="white",
     path_savefig:str=None,
     ylabel="MOS Score",
@@ -497,25 +497,25 @@ def make_mosfig(
     if hatch_list != None:
         plt.rcParams['hatch.color'] = hatch_color
     #plt.rcParams['hatch.linewidth'] = 6
-    fig, ax = plt.subplots(figsize=(8, 5))
+    fig, ax = plt.subplots(figsize=(15, 12))
     # if you need hatch color, set the param like edgecolor="pink"
-    bars = ax.bar(mean_index_list, mean_values_list, yerr=std_values_list, capsize=5, color=color_list, hatch=hatch_list, alpha=0.7)
+    bars = ax.bar(mean_index_list, mean_values_list, yerr=std_values_list, capsize=5, color=color_list, edgecolor="#605C6C", linewidth=1, hatch=hatch_list) #,alpha=0.7)
 
     for bar, mean in zip(bars, mean_values_list):
         #text_y = mean - 0.15  # バーの内部に表示（中央やや上）
         text_y = 1 + 0.2  # バーの内部に表示（中央やや上）
         text_color = "black" #if mean > (y_min + y_max) / 2 else "black"  # 明るさに応じて色を変える
         ax.text(bar.get_x() + bar.get_width() / 2, text_y, f"{mean:.2f}", 
-                ha='center', va='center', fontsize=15, fontweight='bold', color=text_color)
-
+                ha='center', va='center', fontsize=30, fontweight='bold', color=text_color)
 
     ax.set_ylabel(ylabel, fontsize=axlabel_size, fontweight="bold")
     ax.set_xlabel(xlabel, fontsize=axlabel_size, fontweight="bold")
-    ax.tick_params(axis="x", labelsize=12, bottom=False)
-    ax.tick_params(axis="y", labelsize=12, direction="in")
+    ax.tick_params(axis="x", labelsize=26, bottom=False)
+    ax.tick_params(axis="y", labelsize=24, direction="in")
     #ax.set_title(title)
     ax.set_ylim(y_min, y_max) 
-    ax.yaxis.grid(True, linestyle='--', alpha=0.7)
+    ax.set_axisbelow(True)
+    ax.grid(True, linestyle='--', axis="y")# alpha=0.7)
 
     if path_savefig is not None:
         plt.savefig(path_savefig)
