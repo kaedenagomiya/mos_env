@@ -37,6 +37,8 @@ dependencies = [
     "monotonic-align",
     "openai-whisper",
     "streamlit>=1.41.1",
+    "statsmodels>=0.14.4",
+    "scikit-posthocs>=0.11.2",
 ]
 
 [tool.uv]
