@@ -8,7 +8,9 @@ import seaborn as sns
 
 # モデル名リスト
 model_names_list = ['ljspeech', 'gradtts', 'gradtfktts', 'gradtfk5tts', 'nix_deter']
-rename_list = ['ljspeech', 'gradtts', 'gradtfktts', 'gradtfk5tts', 'nix deter']
+#rename_list = ['ljspeech', '', 'gradtfktts', 'gradtfk5tts', 'nix deter']
+rename_list = ['GT', 'Standard-\nConv', 'TFKM3x3\n(proposed)', 'TFKM5x5\n(proposed)', 'Nix deter']
+
 # カラーマップ
 color_list = ['#ff6700', '#FF0000', '#85ACFF', '#245DFE', '#468585']
 hatch_list = ['','','','','']
@@ -24,7 +26,7 @@ SAVE_DIR.mkdir(exist_ok=True)  # 保存先フォルダを作成
 
 # 各モデルの全被験者に対する平均と分散を格納するためのリスト
 mos_means_all_subjects = {model_name: [] for model_name in model_names_list}
-mos_var_all_subjects = {model_name: [] for model_name in model_names_list}
+mos_std_all_subjects = {model_name: [] for model_name in model_names_list}
 subject_counts = {model_name: 0 for model_name in model_names_list}  # 各モデルごとの被験者数を格納
 
 # 実験に採用された被験者数（モデルごとに評価がある被験者の数）
@@ -63,7 +65,8 @@ for subject_dir in DATA_DIR.iterdir():
     # 各モデルの平均値と分散を全被験者分に対してリストに追加
     for model_name in model_names_list:
         mos_means_all_subjects[model_name].append(mos_means[model_name])
-        mos_var_all_subjects[model_name].append(mos_std[model_name] ** 2)
+        #mos_var_all_subjects[model_name].append(mos_std[model_name] ** 2)
+        mos_std_all_subjects[model_name].append(mos_std[model_name])
         subject_counts[model_name] += 1
 
         # 実験に採用された被験者をカウント
@@ -90,7 +93,7 @@ for subject_dir in DATA_DIR.iterdir():
     ax.yaxis.grid(True, linestyle='--', alpha=0.7)
     """
     # 画像を保存
-    save_path = SAVE_DIR / f"mos_{subject_id}.png"
+    save_path = SAVE_DIR / f"mos_{subject_id}.pdf"
     #plt.savefig(save_path)
     #plt.close()
     toybox.make_mosfig(
@@ -117,19 +120,19 @@ print("\n----- Model Statistics -----")
 
 for model_name in model_names_list:
     all_subject_means = mos_means_all_subjects[model_name]
-    all_subject_var = mos_var_all_subjects[model_name]
+    all_subject_std = mos_std_all_subjects[model_name]
     
     # 各モデルの全被験者の平均と分散
     mean_of_means = sum(all_subject_means) / len(all_subject_means)
-    var_of_means = sum(all_subject_var) / len(all_subject_var)
-    std_of_means = np.sqrt(var_of_means)
+    std_of_means = sum(all_subject_std) / len(all_subject_std)
+    #std_of_means = np.sqrt(std_of_means) # std = np.sqrt(variance)
     
     model_means.append(mean_of_means)
     model_std_devs.append(std_of_means)
 
     num_subjects = len(subject_count_per_model[model_name])
     #print(f"{model_name} - Mean of MOS across all subjects: {mean_of_means:.2f}")
-    #print(f"{model_name} - Variance of MOS across all subjects: {var_of_means:.2f}")
+    #print(f"{model_name} - std of MOS across all subjects: {std_of_means:.2f}")
     print(f"{model_name} mean+std: {mean_of_means:.5f}+{std_of_means:.5f}")
     print(f"{model_name} - Number of subjects in experiment: {num_subjects}")
     print()
@@ -140,7 +143,7 @@ for model_name in model_names_list:
 mosmean_pdseries = pd.Series(model_means, index=model_names_list)
 mosstd_pdseries = pd.Series(model_std_devs, index=model_names_list)
 
-save_path = SAVE_DIR / "average_mos_across_subjects.png"
+save_path = SAVE_DIR / "average_mos_across_subjects.pdf"
 toybox.make_mosfig(
     means=mosmean_pdseries,
     std=mosstd_pdseries,
