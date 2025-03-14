@@ -497,20 +497,50 @@ def make_mosfig(
     if hatch_list != None:
         plt.rcParams['hatch.color'] = hatch_color
     #plt.rcParams['hatch.linewidth'] = 6
-    fig, ax = plt.subplots(figsize=(15, 12))
+    fig, ax = plt.subplots(figsize=(18, 18))
     # if you need hatch color, set the param like edgecolor="pink"
     bars = ax.bar(mean_index_list, mean_values_list, yerr=std_values_list, capsize=5, color=color_list, edgecolor="#605C6C", linewidth=1, hatch=hatch_list) #,alpha=0.7)
 
     for bar, mean in zip(bars, mean_values_list):
         #text_y = mean - 0.15  # バーの内部に表示（中央やや上）
-        text_y = 1 + 0.2  # バーの内部に表示（中央やや上）
+        text_y = y_min + 0.1  # バーの内部に表示（中央やや上）
         text_color = "black" #if mean > (y_min + y_max) / 2 else "black"  # 明るさに応じて色を変える
         ax.text(bar.get_x() + bar.get_width() / 2, text_y, f"{mean:.2f}", 
                 ha='center', va='center', fontsize=30, fontweight='bold', color=text_color)
-
+    """
+    dic_box = {
+        'facecolor' : 'lightblue',
+        'edgecolor' : 'black',
+        'boxstyle' : 'Round, pad=0.8',
+        'linewidth' : 1
+    }
+    plt.text(x=10, y=10,
+            s='Params',
+            color='black',
+            ha='center',
+            fontweight='bold',
+            fontsize=24)
+    """
     ax.set_ylabel(ylabel, fontsize=axlabel_size, fontweight="bold")
-    ax.set_xlabel(xlabel, fontsize=axlabel_size, fontweight="bold")
-    ax.tick_params(axis="x", labelsize=26, bottom=False)
+    ax.set_xlabel(xlabel, labelpad=100, fontsize=axlabel_size, fontweight="bold")
+    
+    ax.tick_params(axis="x", pad=3, labelcolor="#515151", labelsize=26, bottom=False)
+    # -----------------------------------------------------------------------------------------------------------------
+    xticks = ax.get_xticks()
+
+    # 2段のラベルを手動で描画
+    for tick, label1, label2 in zip(xticks,
+                                    ['GT', 'Standard-\nConv', 'TFKM3x3\n(proposed)', 'TFKM5x5\n(proposed)', 'Nix deter'],
+                                    ['N/A', '11.184', '5.5782', '5.5938', '5.23']):
+        ax.text(tick, -0.01, label1, ha='center', va='top',
+                fontsize=26, fontweight='bold', color="#515151", transform=ax.get_xaxis_transform())
+        ax.text(tick, -0.07, label2, ha='center', va='top',
+                fontsize=26, color="#515151",
+                transform=ax.get_xaxis_transform())
+
+    # 既存の xticklabels を消す
+    ax.set_xticklabels([])
+    # -----------------------------------------------------------------------------------------------------------------
     ax.tick_params(axis="y", labelsize=24, direction="in")
     #ax.set_title(title)
     ax.set_ylim(y_min, y_max) 
